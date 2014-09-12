@@ -8,6 +8,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-symlink');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-nuget');
@@ -93,6 +94,15 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        symlink: {
+            options: {
+                overwrite: true
+            },
+            testsite: {
+                src: 'src',
+                dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/src'
+            }
+        },
         qunit: {
             all: ['<%= dirs.test.root %>/**/*.html']
         },
@@ -168,7 +178,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['version:apply', 'typescript:build']);
     grunt.registerTask('test', ['setup:test', 'version:apply', 'typescript:build', 'copy:pretest', 'typescript:test', 'qunit']);
-    grunt.registerTask('testsite', ['setup:testsite', 'version:apply', 'typescript:build', 'copy:pretestsite', 'typescript:testsite', 'connect', 'open', 'watch']);
+    grunt.registerTask('testsite', ['setup:testsite', 'version:apply', 'typescript:build', 'copy:pretestsite', 'symlink:testsite', 'typescript:testsite', 'connect', 'open', 'watch']);
     setup(grunt);
     version(grunt);
     grunt.registerTask('package', ['nugetpack:dist']);
