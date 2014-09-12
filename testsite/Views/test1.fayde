@@ -1,8 +1,0 @@
-<Page xmlns="http://schemas.wsick.com/fayde"
-      xmlns:x="http://schemas.wsick.com/fayde/x"
-      xmlns:mylib="lib:Fayde.Drawing"
-      Title="Test 1">
-    <StackPanel Margin="5">
-        <mylib:Sketch Width="200" Height="200" Draw="{EventBinding Draw}" />
-    </StackPanel>
-</Page>
