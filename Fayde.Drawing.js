@@ -21,14 +21,10 @@ var Fayde;
             function Sketch() {
                 _super.call(this);
                 this.Draw = new MulticastEvent();
-                this.DefaultStyleKey = this.constructor;
+                this.DefaultStyleKey = Sketch;
             }
             Sketch.prototype.CreateLayoutUpdater = function (node) {
                 return new SketchLayoutUpdater(node);
-            };
-
-            Sketch.prototype.OnApplyTemplate = function () {
-                _super.prototype.OnApplyTemplate.call(this);
             };
             return Sketch;
         })(Controls.Control);
@@ -44,10 +40,17 @@ var Fayde;
             SketchLayoutUpdater.prototype.Render = function (ctx, region) {
                 ctx.save();
                 this.RenderLayoutClip(ctx);
-                var sketch = this.Node.XObject;
-                sketch.Draw.Raise(this, new Drawing.SketchDrawEventArgs(this._Canvas));
-                ctx.drawImage(this._Canvas, 0, 0);
+                this.RaiseDraw();
+                var w = this.ActualWidth;
+                var h = this.ActualHeight;
+                ctx.drawImage(this._Canvas, 0, 0, w, h, 0, 0, w, h);
                 ctx.restore();
+            };
+
+            SketchLayoutUpdater.prototype.RaiseDraw = function () {
+                var sketch = this.Node.XObject;
+                var session = new Drawing.SketchSession(this._Canvas, this.ActualWidth, this.ActualHeight);
+                sketch.Draw.Raise(this, new Drawing.SketchDrawEventArgs(session));
             };
             return SketchLayoutUpdater;
         })(Fayde.LayoutUpdater);
@@ -60,14 +63,37 @@ var Fayde;
     (function (Drawing) {
         var SketchDrawEventArgs = (function (_super) {
             __extends(SketchDrawEventArgs, _super);
-            function SketchDrawEventArgs(canvas) {
+            function SketchDrawEventArgs(session) {
                 _super.call(this);
-                Object.defineProperty(this, 'canvas', { value: canvas, writable: false });
-                Object.defineProperty(this, 'ctx', { value: canvas.getContext('2d'), writable: false });
+                Object.defineProperty(this, 'SketchSession', { value: session, writable: false });
             }
             return SketchDrawEventArgs;
         })(EventArgs);
         Drawing.SketchDrawEventArgs = SketchDrawEventArgs;
+    })(Fayde.Drawing || (Fayde.Drawing = {}));
+    var Drawing = Fayde.Drawing;
+})(Fayde || (Fayde = {}));
+var Fayde;
+(function (Fayde) {
+    (function (Drawing) {
+        var SketchSession = (function () {
+            function SketchSession(canvas, width, height) {
+                this._Canvas = canvas;
+                this._Ctx = canvas.getContext('2d');
+                Object.defineProperty(this, 'Width', { value: width, writable: false });
+                Object.defineProperty(this, 'Height', { value: height, writable: false });
+            }
+            SketchSession.prototype.Clear = function (color) {
+                if (color) {
+                    this._Ctx.fillStyle = Fayde.Media.SolidColorBrush.FromColor(color).ToHtml5Object();
+                    this._Ctx.fillRect(0, 0, this.Width, this.Height);
+                } else {
+                    this._Ctx.clearRect(0, 0, this.Width, this.Height);
+                }
+            };
+            return SketchSession;
+        })();
+        Drawing.SketchSession = SketchSession;
     })(Fayde.Drawing || (Fayde.Drawing = {}));
     var Drawing = Fayde.Drawing;
 })(Fayde || (Fayde = {}));
