@@ -7,7 +7,7 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
     }
 
     Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
-        console.log(e.args.SketchSession);
+        e.args.SketchSession.FillRect(0, 0, 800, 600);
     }
 }
 export = MainViewModel;

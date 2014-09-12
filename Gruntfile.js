@@ -88,7 +88,8 @@ module.exports = function (grunt) {
                 files: [
                     { expand: true, flatten: true, src: ['Themes/*'], dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/Themes', filter: 'isFile' },
                     { expand: true, flatten: true, src: ['<%= meta.name %>.js'], dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%= meta.name %>.d.ts'], dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>', filter: 'isFile' }
+                    { expand: true, flatten: true, src: ['<%= meta.name %>.d.ts'], dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%= meta.name %>.js.map'], dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>', filter: 'isFile' }
                 ]
             }
         },

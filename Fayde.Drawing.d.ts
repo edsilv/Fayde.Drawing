@@ -29,5 +29,6 @@ declare module Fayde.Drawing {
         public Height: number;
         constructor(canvas: HTMLCanvasElement, width: number, height: number);
         public Clear(color?: Color): void;
+        public FillRect(x: number, y: number, width: number, height: number): void;
     }
 }

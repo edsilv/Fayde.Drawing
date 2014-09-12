@@ -8,10 +8,13 @@ module Fayde.Drawing {
 
         constructor (canvas: HTMLCanvasElement, width: number, height: number) {
             this._Canvas = canvas;
+            this._Canvas.width = width;
+            this._Canvas.height = height;
             this._Ctx = canvas.getContext('2d');
             Object.defineProperty(this, 'Width', {value: width, writable: false});
             Object.defineProperty(this, 'Height', { value: height, writable: false });
-
+//            this._Ctx.canvas.width = width;
+//            this._Ctx.canvas.height = height;
         }
 
         Clear (color?: Color) {
@@ -21,6 +24,11 @@ module Fayde.Drawing {
             } else {
                 this._Ctx.clearRect(0, 0, this.Width, this.Height);
             }
+        }
+
+        FillRect(x: number, y: number, width: number, height: number){
+            this._Ctx.fillStyle = "#bada55";
+            this._Ctx.fillRect(x, y, width, height);
         }
     }
 }
