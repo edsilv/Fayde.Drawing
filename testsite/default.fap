@@ -14,10 +14,12 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock TextAlignment="Center" Text="London"></TextBlock>
                 <mylib:Sketch x:Name="LondonClock" Width="150" Height="150" Draw="{EventBinding LondonClock_Draw}" />
+                <TextBlock TextAlignment="Center" Text="{Binding LondonMeridian}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextAlignment="Center" Text="Auckland"></TextBlock>
                 <mylib:Sketch x:Name="Auckland" Width="150" Height="150" Draw="{EventBinding AucklandClock_Draw}" />
+                <TextBlock TextAlignment="Center" Text="{Binding AucklandMeridian}"></TextBlock>
             </StackPanel>
         </StackPanel>
     </Grid>

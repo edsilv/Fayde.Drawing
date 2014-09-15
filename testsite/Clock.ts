@@ -2,8 +2,8 @@
 
 class Clock {
 
-    _Ctx: CanvasRenderingContext2D;
-    _Time: Moment;
+    private _Ctx: CanvasRenderingContext2D;
+    public Time: Moment;
 
     /**
      * @param {CanvasRenderingContext2D} Canvas rendering context to draw to
@@ -11,11 +11,11 @@ class Clock {
      */
     constructor(ctx: CanvasRenderingContext2D, hours: number = 0) {
         this._Ctx = ctx;
-        this._Time = moment.utc().add(hours, 'hours');
+        this.Time = moment.utc().add(hours, 'hours');
     }
 
     Draw(){
-        var now = this._Time.toDate();
+        var now = this.Time.toDate();
         this._Ctx.save();
         this._Ctx.clearRect(0,0,150,150);
         this._Ctx.translate(75,75);
