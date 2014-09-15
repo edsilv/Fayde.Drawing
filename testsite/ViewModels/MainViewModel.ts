@@ -3,8 +3,6 @@ import Clock = require("../Clock");
 
 class MainViewModel extends Fayde.MVVM.ViewModelBase {
 
-    //private _Sketches: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>[] = [];
-    //private _Looper: Looper;
     private _LondonClock: Clock;
     private _AucklandClock: Clock;
 
@@ -32,56 +30,30 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
     constructor() {
         super();
 
-        this._LondonClock = new Clock(null, 0); // UTC
-        this._AucklandClock = new Clock(null, 11); // UTC + 11 hrs
-
-//        this._Looper = new Looper();
-//
-//        this._Looper.Tick.Subscribe(() => {
-//            // invalidates all registered Sketch controls, causing them to repeatedly trigger their Draw event.
-//            for (var i = 0; i < this._Sketches.length; i++){
-//                var e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>  = this._Sketches[i];
-//                e.sender.Node.LayoutUpdater.InvalidateSubtreePaint();
-//            }
-//        }, this);
-//
-//        this._Looper.Start();
+        this._LondonClock = new Clock(0); // UTC
+        this._AucklandClock = new Clock(11); // UTC + 11 hrs
     }
 
     LondonClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
-//        if (!e.args.SketchSession.Registered) {
-//            e.args.SketchSession.Registered = true;
-//            this._Sketches.push(e);
-//            this._LondonClock = new Clock(e.args.SketchSession.Ctx, 0); // UTC
-//        }
 
         if (!this._LondonClock.Ctx) this._LondonClock.Ctx = e.args.SketchSession.Ctx;
 
         this._LondonClock.Draw();
 
-        this.LondonMeridian = this._GetMeridian(this._LondonClock.Time);
+        this.LondonMeridian = this._GetMeridian(this._LondonClock.GetTime().Hour);
     }
 
     AucklandClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
-//        if (!e.args.SketchSession.Registered) {
-//            e.args.SketchSession.Registered = true;
-//            this._Sketches.push(e);
-//            this._AucklandClock = new Clock(e.args.SketchSession.Ctx, 11); // UTC + 11 hrs
-//        }
 
         if (!this._AucklandClock.Ctx) this._AucklandClock.Ctx = e.args.SketchSession.Ctx;
 
         this._AucklandClock.Draw();
 
-        this.AucklandMeridian = this._GetMeridian(this._AucklandClock.Time);
+        this.AucklandMeridian = this._GetMeridian(this._AucklandClock.GetTime().Hour);
     }
 
-    _GetMeridian(moment: Moment): string {
-        var date = moment.toDate();
-
-        var hrs = date.getHours();
-
-        return (hrs > 12) ? 'PM' : 'AM';
+    _GetMeridian(hour: number): string {
+        return (hour > 12) ? 'PM' : 'AM';
     }
 }
 export = MainViewModel;

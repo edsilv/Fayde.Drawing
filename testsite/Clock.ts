@@ -1,21 +1,23 @@
-/// <reference path="./lib/moment/moment.d.ts" />
 
 class Clock {
 
     public Ctx: CanvasRenderingContext2D;
-    public Time: Moment;
+    private _Hours: number;
 
     /**
      * @param {CanvasRenderingContext2D} Canvas rendering context to draw to
      * @param {Number} Number of hours ahead/behind UTC
      */
-    constructor(ctx?: CanvasRenderingContext2D, hours: number = 0) {
-        if (ctx) this.Ctx = ctx;
-        this.Time = moment.utc().add(hours, 'hours');
+    constructor(hours: number = 0) {
+        this._Hours = hours;
+    }
+
+    GetTime(): DateTime{
+        return DateTime.Now.ToUniversalTime().AddHours(this._Hours);
     }
 
     Draw(){
-        var now = this.Time.toDate();
+        var now = this.GetTime();
         this.Ctx.save();
         this.Ctx.clearRect(0,0,150,150);
         this.Ctx.translate(75,75);
@@ -51,9 +53,10 @@ class Clock {
         }
         this.Ctx.restore();
 
-        var sec = now.getSeconds();
-        var min = now.getMinutes();
-        var hr  = now.getHours();
+        var sec = now.Second;
+        var min = now.Minute;
+        var hr  = now.Hour;
+
         hr = hr>=12 ? hr-12 : hr;
 
         this.Ctx.fillStyle = "black";

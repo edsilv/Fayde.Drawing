@@ -42,6 +42,8 @@ var Fayde;
                 if (now - this._LastVisualTick < MAX_MSPF)
                     return;
                 this._LastVisualTick = now;
+
+                this.XamlNode.LayoutUpdater.InvalidateSubtreePaint();
             };
 
             Sketch.prototype.OnIsAnimatedChanged = function (args) {

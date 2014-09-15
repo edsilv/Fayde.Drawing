@@ -4,7 +4,6 @@
   "dependencies": {
     "requirejs": "*",
     "requirejs-text": "*",
-    "fayde": "*",
-    "moment": "~2.8.3"
+    "fayde": "*"
   }
 }

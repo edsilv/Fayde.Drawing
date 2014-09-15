@@ -38,7 +38,7 @@ module Fayde.Drawing {
                 return;
             this._LastVisualTick = now;
 
-            //this.LayoutUpdater.InvalidateSubtreePaint();
+            this.XamlNode.LayoutUpdater.InvalidateSubtreePaint();
         }
 
         private OnIsAnimatedChanged (args: IDependencyPropertyChangedEventArgs) {
