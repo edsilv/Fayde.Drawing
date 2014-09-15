@@ -23,8 +23,8 @@ var Fayde;
             __extends(Sketch, _super);
             function Sketch() {
                 _super.call(this);
-                this.Draw = new MulticastEvent();
                 this._LastVisualTick = new Date(0).getTime();
+                this.Draw = new MulticastEvent();
                 this.DefaultStyleKey = Sketch;
 
                 this._Timer = new Fayde.ClockTimer();
@@ -47,7 +47,6 @@ var Fayde;
             };
 
             Sketch.prototype.OnIsAnimatedChanged = function (args) {
-                this.IsAnimated = args.NewValue;
             };
             Sketch.IsAnimatedProperty = DependencyProperty.Register("IsAnimated", function () {
                 return Boolean;

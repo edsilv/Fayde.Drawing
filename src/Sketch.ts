@@ -13,6 +13,7 @@ module Fayde.Drawing {
         }
 
         private _Timer: Fayde.ClockTimer;
+        private _LastVisualTick: number = new Date(0).getTime();
 
         static IsAnimatedProperty = DependencyProperty.Register("IsAnimated", () => Boolean, Sketch, false, (d, args) => (<Sketch>d).OnIsAnimatedChanged(args));
 
@@ -28,8 +29,6 @@ module Fayde.Drawing {
             this._Timer.RegisterTimer(this);
         }
 
-        private _LastVisualTick: number = new Date(0).getTime();
-
         OnTicked (lastTime: number, nowTime: number) {
             if (!this.IsAnimated) return;
 
@@ -42,7 +41,7 @@ module Fayde.Drawing {
         }
 
         private OnIsAnimatedChanged (args: IDependencyPropertyChangedEventArgs) {
-            this.IsAnimated = args.NewValue;
+
         }
     }
 

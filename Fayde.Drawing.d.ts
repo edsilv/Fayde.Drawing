@@ -6,11 +6,11 @@ declare module Fayde.Drawing {
     class Sketch extends Fayde.Controls.Control {
         public CreateLayoutUpdater(node: Fayde.Controls.ControlNode): SketchLayoutUpdater;
         private _Timer;
+        private _LastVisualTick;
         static IsAnimatedProperty: DependencyProperty;
         public IsAnimated: boolean;
         public Draw: MulticastEvent<SketchDrawEventArgs>;
         constructor();
-        private _LastVisualTick;
         public OnTicked(lastTime: number, nowTime: number): void;
         private OnIsAnimatedChanged(args);
     }
