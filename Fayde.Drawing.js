@@ -16,16 +16,42 @@ var Fayde;
     (function (Drawing) {
         var Controls = Fayde.Controls;
 
+        var MAX_FPS = 100;
+        var MAX_MSPF = 1000 / MAX_FPS;
+
         var Sketch = (function (_super) {
             __extends(Sketch, _super);
             function Sketch() {
                 _super.call(this);
                 this.Draw = new MulticastEvent();
+                this._LastVisualTick = new Date(0).getTime();
                 this.DefaultStyleKey = Sketch;
+
+                this._Timer = new Fayde.ClockTimer();
+                this._Timer.RegisterTimer(this);
             }
             Sketch.prototype.CreateLayoutUpdater = function (node) {
                 return new SketchLayoutUpdater(node);
             };
+
+            Sketch.prototype.OnTicked = function (lastTime, nowTime) {
+                if (!this.IsAnimated)
+                    return;
+
+                var now = new Date().getTime();
+                if (now - this._LastVisualTick < MAX_MSPF)
+                    return;
+                this._LastVisualTick = now;
+            };
+
+            Sketch.prototype.OnIsAnimatedChanged = function (args) {
+                this.IsAnimated = args.NewValue;
+            };
+            Sketch.IsAnimatedProperty = DependencyProperty.Register("IsAnimated", function () {
+                return Boolean;
+            }, Sketch, false, function (d, args) {
+                return d.OnIsAnimatedChanged(args);
+            });
             return Sketch;
         })(Controls.Control);
         Drawing.Sketch = Sketch;
@@ -78,7 +104,6 @@ var Fayde;
     (function (Drawing) {
         var SketchSession = (function () {
             function SketchSession(canvas, width, height) {
-                this.Registered = false;
                 this._Canvas = canvas;
                 this._Canvas.width = width;
                 this._Canvas.height = height;

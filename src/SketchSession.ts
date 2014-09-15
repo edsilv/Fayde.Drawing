@@ -2,7 +2,6 @@ module Fayde.Drawing {
     export class SketchSession {
         private _Canvas: HTMLCanvasElement;
         public Ctx: CanvasRenderingContext2D;
-        public Registered: boolean = false;
 
         Width: number;
         Height: number;
