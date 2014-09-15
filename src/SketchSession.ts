@@ -1,7 +1,8 @@
 module Fayde.Drawing {
     export class SketchSession {
         private _Canvas: HTMLCanvasElement;
-        private _Ctx: CanvasRenderingContext2D;
+        public Ctx: CanvasRenderingContext2D;
+        public Registered: boolean = false;
 
         Width: number;
         Height: number;
@@ -10,25 +11,23 @@ module Fayde.Drawing {
             this._Canvas = canvas;
             this._Canvas.width = width;
             this._Canvas.height = height;
-            this._Ctx = canvas.getContext('2d');
+            this.Ctx = canvas.getContext('2d');
             Object.defineProperty(this, 'Width', {value: width, writable: false});
             Object.defineProperty(this, 'Height', { value: height, writable: false });
-//            this._Ctx.canvas.width = width;
-//            this._Ctx.canvas.height = height;
         }
 
-        Clear (color?: Color) {
-            if (color) {
-                this._Ctx.fillStyle = Media.SolidColorBrush.FromColor(color).ToHtml5Object();
-                this._Ctx.fillRect(0, 0, this.Width, this.Height);
-            } else {
-                this._Ctx.clearRect(0, 0, this.Width, this.Height);
-            }
-        }
-
-        FillRect(x: number, y: number, width: number, height: number){
-            this._Ctx.fillStyle = "#bada55";
-            this._Ctx.fillRect(x, y, width, height);
-        }
+//        Clear (color?: Color) {
+//            if (color) {
+//                this.Ctx.fillStyle = Media.SolidColorBrush.FromColor(color).ToHtml5Object();
+//                this.Ctx.fillRect(0, 0, this.Width, this.Height);
+//            } else {
+//                this.Ctx.clearRect(0, 0, this.Width, this.Height);
+//            }
+//        }
+//
+//        FillRect(x: number, y: number, width: number, height: number){
+//            this.Ctx.fillStyle = "#bada55";
+//            this.Ctx.fillRect(x, y, width, height);
+//        }
     }
 }
