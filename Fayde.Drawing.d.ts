@@ -1,10 +1,11 @@
-/// <reference path="src/Fayde.d.ts" />
 declare module Fayde.Drawing {
     var Version: string;
 }
 declare module Fayde.Drawing {
-    class Sketch extends Fayde.Controls.Control {
-        public CreateLayoutUpdater(node: Fayde.Controls.ControlNode): SketchLayoutUpdater;
+    class Sketch extends Controls.Control {
+        public CreateLayoutUpdater(node: Controls.ControlNode): SketchLayoutUpdater;
+        private MAX_FPS;
+        private MAX_MSPF;
         private _Timer;
         private _LastVisualTick;
         static IsAnimatedProperty: DependencyProperty;
@@ -16,7 +17,7 @@ declare module Fayde.Drawing {
     }
     class SketchLayoutUpdater extends LayoutUpdater {
         private _Canvas;
-        constructor(node: Fayde.Controls.ControlNode);
+        constructor(node: Controls.ControlNode);
         public Render(ctx: RenderContextEx, region: rect): void;
         private RaiseDraw();
     }

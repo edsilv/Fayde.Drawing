@@ -1,3 +1,4 @@
+/// <reference path="./lib/fayde/Fayde.d.ts" />
 
 class Clock {
 

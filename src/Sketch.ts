@@ -1,16 +1,13 @@
-/// <reference path="Fayde.d.ts" />
 
 module Fayde.Drawing {
 
-    import Controls = Fayde.Controls;
-
-    var MAX_FPS = 100;
-    var MAX_MSPF = 1000 / MAX_FPS;
-
-    export class Sketch extends Controls.Control {
+    export class Sketch extends Fayde.Controls.Control {
         CreateLayoutUpdater (node: Controls.ControlNode) {
             return new SketchLayoutUpdater(node);
         }
+
+        private MAX_FPS: number = 100;
+        private  MAX_MSPF: number = 1000 / this.MAX_FPS;
 
         private _Timer: Fayde.ClockTimer;
         private _LastVisualTick: number = new Date(0).getTime();
@@ -33,7 +30,7 @@ module Fayde.Drawing {
             if (!this.IsAnimated) return;
 
             var now = new Date().getTime();
-            if (now - this._LastVisualTick < MAX_MSPF)
+            if (now - this._LastVisualTick < this.MAX_MSPF)
                 return;
             this._LastVisualTick = now;
 

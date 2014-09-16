@@ -14,15 +14,12 @@ var __extends = this.__extends || function (d, b) {
 var Fayde;
 (function (Fayde) {
     (function (Drawing) {
-        var Controls = Fayde.Controls;
-
-        var MAX_FPS = 100;
-        var MAX_MSPF = 1000 / MAX_FPS;
-
         var Sketch = (function (_super) {
             __extends(Sketch, _super);
             function Sketch() {
                 _super.call(this);
+                this.MAX_FPS = 100;
+                this.MAX_MSPF = 1000 / this.MAX_FPS;
                 this._LastVisualTick = new Date(0).getTime();
                 this.Draw = new MulticastEvent();
                 this.DefaultStyleKey = Sketch;
@@ -39,7 +36,7 @@ var Fayde;
                     return;
 
                 var now = new Date().getTime();
-                if (now - this._LastVisualTick < MAX_MSPF)
+                if (now - this._LastVisualTick < this.MAX_MSPF)
                     return;
                 this._LastVisualTick = now;
 
@@ -54,7 +51,7 @@ var Fayde;
                 return d.OnIsAnimatedChanged(args);
             });
             return Sketch;
-        })(Controls.Control);
+        })(Fayde.Controls.Control);
         Drawing.Sketch = Sketch;
 
         var SketchLayoutUpdater = (function (_super) {
