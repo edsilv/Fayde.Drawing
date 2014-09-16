@@ -178,8 +178,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['version:apply', 'typescript:build']);
     grunt.registerTask('test', ['setup:test', 'version:apply', 'typescript:build', 'copy:pretest', 'typescript:test', 'qunit']);
-    //grunt.registerTask('testsite', ['setup:testsite', 'version:apply', 'typescript:build', 'copy:pretestsite', 'symlink:testsite', 'typescript:testsite', 'connect', 'open', 'watch']);
-    grunt.registerTask('testsite', ['setup:testsite', 'version:apply', 'typescript:build', 'copy:pretestsite', 'typescript:testsite', 'connect', 'open', 'watch']);
+    grunt.registerTask('testsite', ['setup:testsite', 'version:apply', 'typescript:build', 'copy:pretestsite', 'symlink:testsite', 'typescript:testsite', 'connect', 'open', 'watch']);
     setup(grunt);
     version(grunt);
     grunt.registerTask('package', ['nugetpack:dist']);

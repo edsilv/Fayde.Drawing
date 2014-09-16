@@ -18,7 +18,7 @@
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock TextAlignment="Center" Text="Auckland"></TextBlock>
-                <drawing:Sketch x:Name="Auckland" Width="150" Height="150" IsAnimated="true" Draw="{EventBinding AucklandClock_Draw}" />
+                <drawing:Sketch x:Name="AucklandClock" Width="150" Height="150" IsAnimated="true" Draw="{EventBinding AucklandClock_Draw}" />
                 <TextBlock TextAlignment="Center" Text="{Binding AucklandMeridian}"></TextBlock>
             </StackPanel>
         </StackPanel>
