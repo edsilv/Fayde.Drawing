@@ -17,6 +17,10 @@ class Clock {
         return DateTime.Now.ToUniversalTime().AddHours(this._Hours);
     }
 
+    GetMeridian(): string {
+        return (this.GetTime().Hour >= 12) ? 'PM' : 'AM';
+    }
+
     Draw(){
         var now = this.GetTime();
         this.Ctx.save();

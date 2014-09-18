@@ -30,8 +30,8 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
     constructor() {
         super();
 
-        this._LondonClock = new Clock(0); // UTC
-        this._AucklandClock = new Clock(11); // UTC + 11 hrs
+        this._LondonClock = new Clock(1); // UTC + 1 hr
+        this._AucklandClock = new Clock(12); // UTC + 12 hrs
     }
 
     LondonClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
@@ -40,7 +40,7 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
 
         this._LondonClock.Draw();
 
-        this.LondonMeridian = this._GetMeridian(this._LondonClock.GetTime().Hour);
+        this.LondonMeridian = this._LondonClock.GetMeridian();
     }
 
     AucklandClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
@@ -49,11 +49,7 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
 
         this._AucklandClock.Draw();
 
-        this.AucklandMeridian = this._GetMeridian(this._AucklandClock.GetTime().Hour);
-    }
-
-    _GetMeridian(hour: number): string {
-        return (hour > 12) ? 'PM' : 'AM';
+        this.AucklandMeridian = this._AucklandClock.GetMeridian();
     }
 }
 export = MainViewModel;
