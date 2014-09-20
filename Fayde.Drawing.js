@@ -43,6 +43,8 @@ var Fayde;
                     return;
                 this._LastVisualTick = now;
 
+                this.Milliseconds = nowTime;
+
                 this.XamlNode.LayoutUpdater.InvalidateSubtreePaint();
             };
 
@@ -81,7 +83,7 @@ var Fayde;
 
             SketchLayoutUpdater.prototype.RaiseDraw = function () {
                 var sketch = this.Node.XObject;
-                var session = new Drawing.SketchSession(this.Canvas, this.ActualWidth, this.ActualHeight);
+                var session = new Drawing.SketchSession(this.Canvas, this.ActualWidth, this.ActualHeight, sketch.Milliseconds);
                 sketch.Draw.Raise(this, new Drawing.SketchDrawEventArgs(session));
             };
             return SketchLayoutUpdater;
@@ -109,13 +111,14 @@ var Fayde;
 (function (Fayde) {
     (function (Drawing) {
         var SketchSession = (function () {
-            function SketchSession(canvas, width, height) {
+            function SketchSession(canvas, width, height, milliseconds) {
                 this._Canvas = canvas;
                 this._Canvas.width = width;
                 this._Canvas.height = height;
                 this.Ctx = canvas.getContext('2d');
                 Object.defineProperty(this, 'Width', { value: width, writable: false });
                 Object.defineProperty(this, 'Height', { value: height, writable: false });
+                this.Milliseconds = milliseconds;
             }
             return SketchSession;
         })();

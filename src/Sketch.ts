@@ -16,6 +16,8 @@ module Fayde.Drawing {
 
         IsAnimated: boolean;
 
+        Milliseconds: number;
+
         Draw = new MulticastEvent<SketchDrawEventArgs>();
 
         constructor () {
@@ -35,6 +37,8 @@ module Fayde.Drawing {
             if (now - this._LastVisualTick < MAX_MSPF)
                 return;
             this._LastVisualTick = now;
+
+            this.Milliseconds = nowTime;
 
             this.XamlNode.LayoutUpdater.InvalidateSubtreePaint();
         }
@@ -70,7 +74,7 @@ module Fayde.Drawing {
 
         private RaiseDraw () {
             var sketch = <Sketch>this.Node.XObject;
-            var session = new SketchSession(this.Canvas, this.ActualWidth, this.ActualHeight);
+            var session = new SketchSession(this.Canvas, this.ActualWidth, this.ActualHeight, sketch.Milliseconds);
             sketch.Draw.Raise(this, new SketchDrawEventArgs(session));
         }
     }

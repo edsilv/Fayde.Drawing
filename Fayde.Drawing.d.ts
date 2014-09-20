@@ -8,6 +8,7 @@ declare module Fayde.Drawing {
         private _LastVisualTick;
         static IsAnimatedProperty: DependencyProperty;
         public IsAnimated: boolean;
+        public Milliseconds: number;
         public Draw: MulticastEvent<SketchDrawEventArgs>;
         constructor();
         public OnTicked(lastTime: number, nowTime: number): void;
@@ -33,6 +34,7 @@ declare module Fayde.Drawing {
         public Ctx: CanvasRenderingContext2D;
         public Width: number;
         public Height: number;
-        constructor(canvas: HTMLCanvasElement, width: number, height: number);
+        public Milliseconds: number;
+        constructor(canvas: HTMLCanvasElement, width: number, height: number, milliseconds: number);
     }
 }
