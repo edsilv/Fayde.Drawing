@@ -12,9 +12,10 @@ declare module Fayde.Drawing {
         constructor();
         public OnTicked(lastTime: number, nowTime: number): void;
         private OnIsAnimatedChanged(args);
+        private Sketch_SizeChanged(sender, e);
     }
     class SketchLayoutUpdater extends LayoutUpdater {
-        private _Canvas;
+        public Canvas: HTMLCanvasElement;
         constructor(node: Controls.ControlNode);
         public Render(ctx: RenderContextEx, region: rect): void;
         private RaiseDraw();

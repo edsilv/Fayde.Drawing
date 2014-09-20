@@ -25,6 +25,8 @@ var Fayde;
                 this.Draw = new MulticastEvent();
                 this.DefaultStyleKey = Sketch;
 
+                this.SizeChanged.Subscribe(this.Sketch_SizeChanged, this);
+
                 this._Timer = new Fayde.ClockTimer();
                 this._Timer.RegisterTimer(this);
             }
@@ -46,6 +48,11 @@ var Fayde;
 
             Sketch.prototype.OnIsAnimatedChanged = function (args) {
             };
+
+            Sketch.prototype.Sketch_SizeChanged = function (sender, e) {
+                this.XamlNode.LayoutUpdater.Canvas.width = e.NewSize.Width;
+                this.XamlNode.LayoutUpdater.Canvas.height = e.NewSize.Height;
+            };
             Sketch.IsAnimatedProperty = DependencyProperty.Register("IsAnimated", function () {
                 return Boolean;
             }, Sketch, false, function (d, args) {
@@ -59,7 +66,7 @@ var Fayde;
             __extends(SketchLayoutUpdater, _super);
             function SketchLayoutUpdater(node) {
                 _super.call(this, node);
-                this._Canvas = document.createElement('canvas');
+                this.Canvas = document.createElement('canvas');
                 this.SetContainerMode(true);
             }
             SketchLayoutUpdater.prototype.Render = function (ctx, region) {
@@ -68,13 +75,13 @@ var Fayde;
                 this.RaiseDraw();
                 var w = this.ActualWidth;
                 var h = this.ActualHeight;
-                ctx.drawImage(this._Canvas, 0, 0, w, h, 0, 0, w, h);
+                ctx.drawImage(this.Canvas, 0, 0, w, h, 0, 0, w, h);
                 ctx.restore();
             };
 
             SketchLayoutUpdater.prototype.RaiseDraw = function () {
                 var sketch = this.Node.XObject;
-                var session = new Drawing.SketchSession(this._Canvas, this.ActualWidth, this.ActualHeight);
+                var session = new Drawing.SketchSession(this.Canvas, this.ActualWidth, this.ActualHeight);
                 sketch.Draw.Raise(this, new Drawing.SketchDrawEventArgs(session));
             };
             return SketchLayoutUpdater;
