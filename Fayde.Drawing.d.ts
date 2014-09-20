@@ -4,8 +4,6 @@ declare module Fayde.Drawing {
 declare module Fayde.Drawing {
     class Sketch extends Controls.Control {
         public CreateLayoutUpdater(node: Controls.ControlNode): SketchLayoutUpdater;
-        private MAX_FPS;
-        private MAX_MSPF;
         private _Timer;
         private _LastVisualTick;
         static IsAnimatedProperty: DependencyProperty;

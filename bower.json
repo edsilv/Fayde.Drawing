@@ -1,6 +1,5 @@
 {
   "name": "Fayde.Drawing",
-  "version": "0.1.2",
   "ignore": [
     "build",
     "nuget",
