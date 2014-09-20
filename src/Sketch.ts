@@ -25,6 +25,8 @@ module Fayde.Drawing {
             super();
             this.DefaultStyleKey = Sketch;
 
+            this.Background = new Media.Brush("Transparent");
+
             this.SizeChanged.Subscribe(this.Sketch_SizeChanged, this);
 
             this._Timer = new Fayde.ClockTimer();
