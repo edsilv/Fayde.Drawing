@@ -11,7 +11,7 @@ declare module Fayde.Drawing {
         public Milliseconds: number;
         public Draw: MulticastEvent<SketchDrawEventArgs>;
         public Click: RoutedEvent<RoutedEventArgs>;
-        public _MousePosition: Point;
+        public MousePosition: Point;
         constructor();
         public OnTicked(lastTime: number, nowTime: number): void;
         private OnIsAnimatedChanged(args);
@@ -22,7 +22,6 @@ declare module Fayde.Drawing {
         public OnMouseLeftButtonDown(e: Input.MouseButtonEventArgs): void;
         public OnMouseLeftButtonUp(e: Input.MouseButtonEventArgs): void;
         public OnTouchDown(e: Input.TouchEventArgs): void;
-        public OnClick(): void;
     }
     class SketchLayoutUpdater extends LayoutUpdater {
         public Canvas: HTMLCanvasElement;

@@ -19,7 +19,7 @@ module Fayde.Drawing {
         Milliseconds: number;
         Draw = new MulticastEvent<SketchDrawEventArgs>();
         Click = new RoutedEvent<RoutedEventArgs>();
-        _MousePosition: Point = new Point();
+        MousePosition: Point = new Point();
 
         constructor () {
             super();
@@ -70,38 +70,26 @@ module Fayde.Drawing {
         OnMouseMove(e: Input.MouseEventArgs) {
             super.OnMouseMove(e);
 
-            this._MousePosition = e.GetPosition(this);
-
-            //this.OnMouseMove();
+            this.MousePosition = e.GetPosition(this);
         }
 
         OnMouseLeftButtonDown(e: Input.MouseButtonEventArgs) {
             super.OnMouseLeftButtonDown(e);
 
-            e.Handled = true; // stop it bubbling up further
-
-            this.OnClick();
+            //e.Handled = true; // stop it bubbling up further
         }
 
         OnMouseLeftButtonUp(e: Input.MouseButtonEventArgs) {
-            super.OnMouseLeftButtonDown(e);
+            super.OnMouseLeftButtonUp(e);
+
+            //e.Handled = true; // stop it bubbling up further
         }
 
         OnTouchDown(e: Input.TouchEventArgs){
             super.OnTouchDown(e);
 
-            e.Handled = true;
-
-            this.OnClick();
+            //e.Handled = true; // stop it bubbling up further
         }
-
-        OnClick() {
-            this.Click.Raise(this, new RoutedEventArgs());
-        }
-
-//        OnMouseMove() {
-//            this.MouseMove.Raise(this, new RoutedEventArgs());
-//        }
     }
 
     export class SketchLayoutUpdater extends LayoutUpdater {

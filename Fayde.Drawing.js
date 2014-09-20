@@ -26,7 +26,7 @@ var Fayde;
                 this._LastVisualTick = new Date(0).getTime();
                 this.Draw = new MulticastEvent();
                 this.Click = new Fayde.RoutedEvent();
-                this._MousePosition = new Point();
+                this.MousePosition = new Point();
                 this.DefaultStyleKey = Sketch;
 
                 var lu = this.XamlNode.LayoutUpdater;
@@ -75,31 +75,19 @@ var Fayde;
             Sketch.prototype.OnMouseMove = function (e) {
                 _super.prototype.OnMouseMove.call(this, e);
 
-                this._MousePosition = e.GetPosition(this);
+                this.MousePosition = e.GetPosition(this);
             };
 
             Sketch.prototype.OnMouseLeftButtonDown = function (e) {
                 _super.prototype.OnMouseLeftButtonDown.call(this, e);
-
-                e.Handled = true;
-
-                this.OnClick();
             };
 
             Sketch.prototype.OnMouseLeftButtonUp = function (e) {
-                _super.prototype.OnMouseLeftButtonDown.call(this, e);
+                _super.prototype.OnMouseLeftButtonUp.call(this, e);
             };
 
             Sketch.prototype.OnTouchDown = function (e) {
                 _super.prototype.OnTouchDown.call(this, e);
-
-                e.Handled = true;
-
-                this.OnClick();
-            };
-
-            Sketch.prototype.OnClick = function () {
-                this.Click.Raise(this, new Fayde.RoutedEventArgs());
             };
             Sketch.IsAnimatedProperty = DependencyProperty.Register("IsAnimated", function () {
                 return Boolean;
