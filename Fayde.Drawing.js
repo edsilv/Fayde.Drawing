@@ -14,6 +14,8 @@ var __extends = this.__extends || function (d, b) {
 var Fayde;
 (function (Fayde) {
     (function (Drawing) {
+        var Control = Fayde.Controls.Control;
+
         var MAX_FPS = 100;
         var MAX_MSPF = 1000 / MAX_FPS;
 
@@ -23,6 +25,8 @@ var Fayde;
                 _super.call(this);
                 this._LastVisualTick = new Date(0).getTime();
                 this.Draw = new MulticastEvent();
+                this.Click = new Fayde.RoutedEvent();
+                this._MousePosition = new Point();
                 this.DefaultStyleKey = Sketch;
 
                 this.SizeChanged.Subscribe(this.Sketch_SizeChanged, this);
@@ -55,13 +59,51 @@ var Fayde;
                 this.XamlNode.LayoutUpdater.Canvas.width = e.NewSize.Width;
                 this.XamlNode.LayoutUpdater.Canvas.height = e.NewSize.Height;
             };
+
+            Sketch.prototype.OnMouseEnter = function (e) {
+                _super.prototype.OnMouseEnter.call(this, e);
+            };
+
+            Sketch.prototype.OnMouseLeave = function (e) {
+                _super.prototype.OnMouseLeave.call(this, e);
+            };
+
+            Sketch.prototype.OnMouseMove = function (e) {
+                _super.prototype.OnMouseMove.call(this, e);
+
+                this._MousePosition = e.GetPosition(this);
+            };
+
+            Sketch.prototype.OnMouseLeftButtonDown = function (e) {
+                _super.prototype.OnMouseLeftButtonDown.call(this, e);
+
+                e.Handled = true;
+
+                this.OnClick();
+            };
+
+            Sketch.prototype.OnMouseLeftButtonUp = function (e) {
+                _super.prototype.OnMouseLeftButtonDown.call(this, e);
+            };
+
+            Sketch.prototype.OnTouchDown = function (e) {
+                _super.prototype.OnTouchDown.call(this, e);
+
+                e.Handled = true;
+
+                this.OnClick();
+            };
+
+            Sketch.prototype.OnClick = function () {
+                this.Click.Raise(this, new Fayde.RoutedEventArgs());
+            };
             Sketch.IsAnimatedProperty = DependencyProperty.Register("IsAnimated", function () {
                 return Boolean;
             }, Sketch, false, function (d, args) {
                 return d.OnIsAnimatedChanged(args);
             });
             return Sketch;
-        })(Fayde.Controls.Control);
+        })(Control);
         Drawing.Sketch = Sketch;
 
         var SketchLayoutUpdater = (function (_super) {

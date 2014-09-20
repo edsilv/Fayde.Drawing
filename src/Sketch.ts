@@ -1,24 +1,25 @@
 
 module Fayde.Drawing {
 
+    import Control = Fayde.Controls.Control;
+
     var MAX_FPS: number = 100;
     var  MAX_MSPF: number = 1000 / MAX_FPS;
 
-    export class Sketch extends Fayde.Controls.Control {
+    export class Sketch extends Control {
         CreateLayoutUpdater (node: Controls.ControlNode) {
             return new SketchLayoutUpdater(node);
         }
 
-        private _Timer: Fayde.ClockTimer;
-        private _LastVisualTick: number = new Date(0).getTime();
-
         static IsAnimatedProperty = DependencyProperty.Register("IsAnimated", () => Boolean, Sketch, false, (d, args) => (<Sketch>d).OnIsAnimatedChanged(args));
 
+        private _Timer: Fayde.ClockTimer;
+        private _LastVisualTick: number = new Date(0).getTime();
         IsAnimated: boolean;
-
         Milliseconds: number;
-
         Draw = new MulticastEvent<SketchDrawEventArgs>();
+        Click = new RoutedEvent<RoutedEventArgs>();
+        _MousePosition: Point = new Point();
 
         constructor () {
             super();
@@ -52,6 +53,50 @@ module Fayde.Drawing {
             (<SketchLayoutUpdater>this.XamlNode.LayoutUpdater).Canvas.width = e.NewSize.Width;
             (<SketchLayoutUpdater>this.XamlNode.LayoutUpdater).Canvas.height = e.NewSize.Height;
         }
+
+        OnMouseEnter(e: Input.MouseEventArgs) {
+            super.OnMouseEnter(e);
+        }
+
+        OnMouseLeave(e: Input.MouseEventArgs) {
+            super.OnMouseLeave(e);
+        }
+
+        OnMouseMove(e: Input.MouseEventArgs) {
+            super.OnMouseMove(e);
+
+            this._MousePosition = e.GetPosition(this);
+
+            //this.OnMouseMove();
+        }
+
+        OnMouseLeftButtonDown(e: Input.MouseButtonEventArgs) {
+            super.OnMouseLeftButtonDown(e);
+
+            e.Handled = true; // stop it bubbling up further
+
+            this.OnClick();
+        }
+
+        OnMouseLeftButtonUp(e: Input.MouseButtonEventArgs) {
+            super.OnMouseLeftButtonDown(e);
+        }
+
+        OnTouchDown(e: Input.TouchEventArgs){
+            super.OnTouchDown(e);
+
+            e.Handled = true;
+
+            this.OnClick();
+        }
+
+        OnClick() {
+            this.Click.Raise(this, new RoutedEventArgs());
+        }
+
+//        OnMouseMove() {
+//            this.MouseMove.Raise(this, new RoutedEventArgs());
+//        }
     }
 
     export class SketchLayoutUpdater extends LayoutUpdater {

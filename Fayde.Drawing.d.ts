@@ -4,16 +4,25 @@ declare module Fayde.Drawing {
 declare module Fayde.Drawing {
     class Sketch extends Controls.Control {
         public CreateLayoutUpdater(node: Controls.ControlNode): SketchLayoutUpdater;
+        static IsAnimatedProperty: DependencyProperty;
         private _Timer;
         private _LastVisualTick;
-        static IsAnimatedProperty: DependencyProperty;
         public IsAnimated: boolean;
         public Milliseconds: number;
         public Draw: MulticastEvent<SketchDrawEventArgs>;
+        public Click: RoutedEvent<RoutedEventArgs>;
+        public _MousePosition: Point;
         constructor();
         public OnTicked(lastTime: number, nowTime: number): void;
         private OnIsAnimatedChanged(args);
         private Sketch_SizeChanged(sender, e);
+        public OnMouseEnter(e: Input.MouseEventArgs): void;
+        public OnMouseLeave(e: Input.MouseEventArgs): void;
+        public OnMouseMove(e: Input.MouseEventArgs): void;
+        public OnMouseLeftButtonDown(e: Input.MouseButtonEventArgs): void;
+        public OnMouseLeftButtonUp(e: Input.MouseButtonEventArgs): void;
+        public OnTouchDown(e: Input.TouchEventArgs): void;
+        public OnClick(): void;
     }
     class SketchLayoutUpdater extends LayoutUpdater {
         public Canvas: HTMLCanvasElement;

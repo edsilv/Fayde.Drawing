@@ -43,6 +43,11 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
         this.LondonMeridian = this._LondonClock.GetMeridian();
     }
 
+    LondonClock_Click(sender: any, e: Fayde.RoutedEventArgs){
+
+        console.log("click");
+    }
+
     AucklandClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
 
         if (!this._AucklandClock.Ctx) this._AucklandClock.Ctx = e.args.SketchSession.Ctx;
