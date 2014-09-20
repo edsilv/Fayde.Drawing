@@ -29,6 +29,10 @@ var Fayde;
                 this._MousePosition = new Point();
                 this.DefaultStyleKey = Sketch;
 
+                var lu = this.XamlNode.LayoutUpdater;
+                lu.CanHitElement = true;
+                lu.IsNeverInsideObject = false;
+
                 this.SizeChanged.Subscribe(this.Sketch_SizeChanged, this);
 
                 this._Timer = new Fayde.ClockTimer();

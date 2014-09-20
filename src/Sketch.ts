@@ -25,7 +25,10 @@ module Fayde.Drawing {
             super();
             this.DefaultStyleKey = Sketch;
 
-            this.Background = new Media.Brush("Transparent");
+            // enable hit testing
+            var lu = this.XamlNode.LayoutUpdater;
+            lu.CanHitElement = true;
+            lu.IsNeverInsideObject = false;
 
             this.SizeChanged.Subscribe(this.Sketch_SizeChanged, this);
 
