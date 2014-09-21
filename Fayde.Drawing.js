@@ -129,6 +129,77 @@ var Fayde;
 var Fayde;
 (function (Fayde) {
     (function (Drawing) {
+        var SketchContext = (function () {
+            function SketchContext() {
+                this._IsSetup = false;
+                this.FrameCount = 0;
+            }
+
+            Object.defineProperty(SketchContext.prototype, "SketchSession", {
+                get: function () {
+                    return this._SketchSession;
+                },
+                set: function (value) {
+                    this._SketchSession = value;
+
+                    if (!this._IsSetup) {
+                        this.Setup();
+                        this._IsSetup = true;
+                    }
+
+                    this.Draw();
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(SketchContext.prototype, "Ctx", {
+                get: function () {
+                    return this.SketchSession.Ctx;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(SketchContext.prototype, "Width", {
+                get: function () {
+                    return this.Ctx.canvas.width;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(SketchContext.prototype, "Height", {
+                get: function () {
+                    return this.Ctx.canvas.height;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Object.defineProperty(SketchContext.prototype, "Milliseconds", {
+                get: function () {
+                    return this.SketchSession.Milliseconds;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            SketchContext.prototype.Setup = function () {
+            };
+
+            SketchContext.prototype.Draw = function () {
+                this.FrameCount++;
+            };
+            return SketchContext;
+        })();
+        Drawing.SketchContext = SketchContext;
+    })(Fayde.Drawing || (Fayde.Drawing = {}));
+    var Drawing = Fayde.Drawing;
+})(Fayde || (Fayde = {}));
+var Fayde;
+(function (Fayde) {
+    (function (Drawing) {
         var SketchDrawEventArgs = (function (_super) {
             __extends(SketchDrawEventArgs, _super);
             function SketchDrawEventArgs(session) {

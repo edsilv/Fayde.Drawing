@@ -31,6 +31,21 @@ declare module Fayde.Drawing {
     }
 }
 declare module Fayde.Drawing {
+    class SketchContext {
+        private _IsSetup;
+        private _SketchSession;
+        public FrameCount: number;
+        public SketchSession : SketchSession;
+        public Ctx : CanvasRenderingContext2D;
+        public Width : number;
+        public Height : number;
+        public Milliseconds : number;
+        constructor();
+        public Setup(): void;
+        public Draw(): void;
+    }
+}
+declare module Fayde.Drawing {
     class SketchDrawEventArgs extends EventArgs {
         public SketchSession: SketchSession;
         constructor(session: SketchSession);
