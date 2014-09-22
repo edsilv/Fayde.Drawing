@@ -147,6 +147,7 @@ var Fayde;
                         this._IsSetup = true;
                     }
 
+                    this.Update();
                     this.Draw();
                 },
                 enumerable: true,
@@ -186,6 +187,9 @@ var Fayde;
             });
 
             SketchContext.prototype.Setup = function () {
+            };
+
+            SketchContext.prototype.Update = function () {
             };
 
             SketchContext.prototype.Draw = function () {

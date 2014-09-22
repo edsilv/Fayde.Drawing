@@ -42,6 +42,7 @@ declare module Fayde.Drawing {
         public Milliseconds : number;
         constructor();
         public Setup(): void;
+        public Update(): void;
         public Draw(): void;
     }
 }
