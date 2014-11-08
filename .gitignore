@@ -6,7 +6,6 @@
 *.xap
 *.js.map
 src/packages
-src/Fayde.Controls.Test/ViewModels/MainViewModel.js
 .idea
 node_modules
 testsite/lib
@@ -16,3 +15,5 @@ test/runner.js
 test/tests/test1.js
 
 testsite/.build/
+
+lib/

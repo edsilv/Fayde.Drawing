@@ -1,11 +1,27 @@
 {
   "name": "Fayde.Drawing",
+  "version": "0.3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/edsilv/fayde.drawing"
+  },
+  "authors": [
+    "edsilv <e.silverton@gmail.com>",
+    "BSick7 <brad.sickles@gmail.com>"
+  ],
   "ignore": [
     "build",
     "nuget",
     "src",
     "test",
     "testsite",
+    "typings",
     "Gruntfile.js"
-  ]
+  ],
+  "dependencies": {
+    "fayde": "~0.13.0",
+    "requirejs": "~2.1.15",
+    "requirejs-text": "~2.0.12",
+    "qunit": "~1.14.0"
+  }
 }
