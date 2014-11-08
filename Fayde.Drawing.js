@@ -261,7 +261,7 @@ var Fayde;
                         var w = input.actualWidth;
                         var h = input.actualHeight;
                         input.sketcher && input.sketcher(input.canvas, w, h);
-                        ctx.raw.drawImage(this.Canvas, 0, 0, w, h, 0, 0, w, h);
+                        ctx.raw.drawImage(input.canvas, 0, 0, w, h, 0, 0, w, h);
                         ctx.restore();
                         return true;
                     }
