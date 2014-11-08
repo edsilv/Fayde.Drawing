@@ -14,8 +14,6 @@ var __extends = this.__extends || function (d, b) {
 var Fayde;
 (function (Fayde) {
     (function (Drawing) {
-        var Control = Fayde.Controls.Control;
-
         var MAX_FPS = 100;
         var MAX_MSPF = 1000 / MAX_FPS;
 
@@ -29,17 +27,21 @@ var Fayde;
                 this.MousePosition = new Point();
                 this.DefaultStyleKey = Sketch;
 
-                var lu = this.XamlNode.LayoutUpdater;
-                lu.CanHitElement = true;
-                lu.IsNeverInsideObject = false;
-
-                this.SizeChanged.Subscribe(this.Sketch_SizeChanged, this);
-
                 this._Timer = new Fayde.ClockTimer();
                 this._Timer.RegisterTimer(this);
             }
-            Sketch.prototype.CreateLayoutUpdater = function (node) {
-                return new SketchLayoutUpdater(node);
+            Sketch.prototype.CreateLayoutUpdater = function () {
+                var _this = this;
+                var upd = new Drawing.sketch.SketchUpdater();
+                upd.assets.sketcher = function (canvas, w, h) {
+                    return _this.RaiseDraw(canvas, w, h);
+                };
+                return upd;
+            };
+
+            Sketch.prototype.RaiseDraw = function (canvas, width, height) {
+                var session = new Drawing.SketchSession(canvas, width, height, this.Milliseconds);
+                this.Draw.Raise(this, new Drawing.SketchDrawEventArgs(session));
             };
 
             Sketch.prototype.OnTicked = function (lastTime, nowTime) {
@@ -53,15 +55,10 @@ var Fayde;
 
                 this.Milliseconds = nowTime;
 
-                this.XamlNode.LayoutUpdater.InvalidateSubtreePaint();
+                this.XamlNode.LayoutUpdater.invalidate();
             };
 
             Sketch.prototype.OnIsAnimatedChanged = function (args) {
-            };
-
-            Sketch.prototype.Sketch_SizeChanged = function (sender, e) {
-                this.XamlNode.LayoutUpdater.Canvas.width = e.NewSize.Width;
-                this.XamlNode.LayoutUpdater.Canvas.height = e.NewSize.Height;
             };
 
             Sketch.prototype.OnMouseEnter = function (e) {
@@ -95,34 +92,8 @@ var Fayde;
                 return d.OnIsAnimatedChanged(args);
             });
             return Sketch;
-        })(Control);
+        })(Fayde.FrameworkElement);
         Drawing.Sketch = Sketch;
-
-        var SketchLayoutUpdater = (function (_super) {
-            __extends(SketchLayoutUpdater, _super);
-            function SketchLayoutUpdater(node) {
-                _super.call(this, node);
-                this.Canvas = document.createElement('canvas');
-                this.SetContainerMode(true);
-            }
-            SketchLayoutUpdater.prototype.Render = function (ctx, region) {
-                ctx.save();
-                this.RenderLayoutClip(ctx);
-                this.RaiseDraw();
-                var w = this.ActualWidth;
-                var h = this.ActualHeight;
-                ctx.drawImage(this.Canvas, 0, 0, w, h, 0, 0, w, h);
-                ctx.restore();
-            };
-
-            SketchLayoutUpdater.prototype.RaiseDraw = function () {
-                var sketch = this.Node.XObject;
-                var session = new Drawing.SketchSession(this.Canvas, this.ActualWidth, this.ActualHeight, sketch.Milliseconds);
-                sketch.Draw.Raise(this, new Drawing.SketchDrawEventArgs(session));
-            };
-            return SketchLayoutUpdater;
-        })(Fayde.LayoutUpdater);
-        Drawing.SketchLayoutUpdater = SketchLayoutUpdater;
     })(Fayde.Drawing || (Fayde.Drawing = {}));
     var Drawing = Fayde.Drawing;
 })(Fayde || (Fayde = {}));
@@ -232,6 +203,74 @@ var Fayde;
             return SketchSession;
         })();
         Drawing.SketchSession = SketchSession;
+    })(Fayde.Drawing || (Fayde.Drawing = {}));
+    var Drawing = Fayde.Drawing;
+})(Fayde || (Fayde = {}));
+var Fayde;
+(function (Fayde) {
+    (function (Drawing) {
+        (function (sketch) {
+            var SketchUpdater = (function (_super) {
+                __extends(SketchUpdater, _super);
+                function SketchUpdater() {
+                    _super.apply(this, arguments);
+                }
+                SketchUpdater.prototype.init = function () {
+                    this.setRenderPipe(minerva.singleton(sketch.render.SketchRenderPipeDef));
+
+                    var assets = this.assets;
+                    assets.canvas = document.createElement('canvas');
+
+                    _super.prototype.init.call(this);
+                };
+
+                SketchUpdater.prototype.onSizeChanged = function (oldSize, newSize) {
+                    _super.prototype.onSizeChanged.call(this, oldSize, newSize);
+                    var assets = this.assets;
+                    assets.canvas.width = newSize.width;
+                    assets.canvas.height = newSize.height;
+                };
+                return SketchUpdater;
+            })(minerva.core.Updater);
+            sketch.SketchUpdater = SketchUpdater;
+        })(Drawing.sketch || (Drawing.sketch = {}));
+        var sketch = Drawing.sketch;
+    })(Fayde.Drawing || (Fayde.Drawing = {}));
+    var Drawing = Fayde.Drawing;
+})(Fayde || (Fayde = {}));
+var Fayde;
+(function (Fayde) {
+    (function (Drawing) {
+        (function (sketch) {
+            (function (render) {
+                var SketchRenderPipeDef = (function (_super) {
+                    __extends(SketchRenderPipeDef, _super);
+                    function SketchRenderPipeDef() {
+                        _super.call(this);
+                        this.replaceTapin('doRender', tapins.doRender);
+                    }
+                    return SketchRenderPipeDef;
+                })(minerva.core.render.RenderPipeDef);
+                render.SketchRenderPipeDef = SketchRenderPipeDef;
+
+                var tapins;
+                (function (tapins) {
+                    function doRender(input, state, output, ctx, region, tree) {
+                        ctx.save();
+
+                        var w = input.actualWidth;
+                        var h = input.actualHeight;
+                        input.sketcher && input.sketcher(input.canvas, w, h);
+                        ctx.raw.drawImage(this.Canvas, 0, 0, w, h, 0, 0, w, h);
+                        ctx.restore();
+                        return true;
+                    }
+                    tapins.doRender = doRender;
+                })(tapins || (tapins = {}));
+            })(sketch.render || (sketch.render = {}));
+            var render = sketch.render;
+        })(Drawing.sketch || (Drawing.sketch = {}));
+        var sketch = Drawing.sketch;
     })(Fayde.Drawing || (Fayde.Drawing = {}));
     var Drawing = Fayde.Drawing;
 })(Fayde || (Fayde = {}));

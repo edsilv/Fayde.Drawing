@@ -1,4 +1,3 @@
-/// <reference path="../../Fayde.Drawing.d.ts" />
 import Clock = require("../Clock");
 
 class MainViewModel extends Fayde.MVVM.ViewModelBase {
@@ -9,32 +8,32 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
     public _LondonMeridian: string;
     public _AucklandMeridian: string;
 
-    get LondonMeridian(): string {
+    get LondonMeridian (): string {
         return this._LondonMeridian;
     }
 
-    set LondonMeridian(value: string){
+    set LondonMeridian (value: string) {
         this._LondonMeridian = value;
         this.OnPropertyChanged("LondonMeridian");
     }
 
-    get AucklandMeridian(): string {
+    get AucklandMeridian (): string {
         return this._AucklandMeridian;
     }
 
-    set AucklandMeridian(value: string){
+    set AucklandMeridian (value: string) {
         this._AucklandMeridian = value;
         this.OnPropertyChanged("AucklandMeridian");
     }
 
-    constructor() {
+    constructor () {
         super();
 
         this._LondonClock = new Clock(1); // UTC + 1 hr
         this._AucklandClock = new Clock(12); // UTC + 12 hrs
     }
 
-    LondonClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
+    LondonClock_Draw (e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>) {
 
         if (!this._LondonClock.Ctx) this._LondonClock.Ctx = e.args.SketchSession.Ctx;
 
@@ -43,11 +42,11 @@ class MainViewModel extends Fayde.MVVM.ViewModelBase {
         this.LondonMeridian = this._LondonClock.GetMeridian();
     }
 
-    LondonClock_MouseDown(e: any){
+    LondonClock_MouseDown (e: any) {
         console.log(e.args.Source.MousePosition.X);
     }
 
-    AucklandClock_Draw(e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>){
+    AucklandClock_Draw (e: Fayde.IEventBindingArgs<Fayde.Drawing.SketchDrawEventArgs>) {
 
         if (!this._AucklandClock.Ctx) this._AucklandClock.Ctx = e.args.SketchSession.Ctx;
 
