@@ -128,7 +128,7 @@ module.exports = function (grunt) {
                     { src: './<%= meta.name %>.js', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/<%= meta.name %>.js' },
                     { src: './<%= meta.name %>.d.ts', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/<%= meta.name %>.d.ts' },
                     { src: './<%= meta.name %>.js.map', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/<%= meta.name %>.js.map' },
-                    { src: './src', dest: '<%= dirs.test.root %>/lib/<%= meta.name %>/src' }
+                    { src: './src', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/src' }
                 ]
             }
         },
