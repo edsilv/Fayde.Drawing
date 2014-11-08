@@ -70,6 +70,7 @@ module.exports = function (grunt) {
             test: {
                 src: [
                     'typings/*.d.ts',
+                    'Fayde.Drawing.d.ts',
                     '<%= dirs.test.root %>/**/*.ts',
                     '!<%= dirs.test.root %>/lib/**/*.ts',
                     'lib/minerva/minerva.d.ts',
@@ -84,6 +85,7 @@ module.exports = function (grunt) {
             testsite: {
                 src: [
                     'typings/*.d.ts',
+                    'Fayde.Drawing.d.ts',
                     '<%= dirs.testsite.root %>/**/*.ts',
                     '!<%= dirs.testsite.root %>/lib/**/*.ts',
                     'lib/minerva/minerva.d.ts',
@@ -109,7 +111,7 @@ module.exports = function (grunt) {
                     { src: './lib/qunit', dest: '<%= dirs.test.root %>/lib/qunit' },
                     { src: './lib/requirejs', dest: '<%= dirs.test.root %>/lib/requirejs' },
                     { src: './lib/requirejs-text', dest: '<%= dirs.test.root %>/lib/requirejs-text' },
-                    { src: './themes', dest: './test/lib/<%= meta.name %>/themes' },
+                    { src: './themes', dest: '<%= dirs.test.root %>/lib/<%= meta.name %>/themes' },
                     { src: './<%= meta.name %>.js', dest: '<%= dirs.test.root %>/lib/<%= meta.name %>/<%= meta.name %>.js' },
                     { src: './<%= meta.name %>.d.ts', dest: '<%= dirs.test.root %>/lib/<%= meta.name %>/<%= meta.name %>.d.ts' },
                     { src: './<%= meta.name %>.js.map', dest: '<%= dirs.test.root %>/lib/<%= meta.name %>/<%= meta.name %>.js.map' },
@@ -122,7 +124,7 @@ module.exports = function (grunt) {
                     { src: './lib/fayde', dest: '<%= dirs.testsite.root %>/lib/fayde' },
                     { src: './lib/requirejs', dest: '<%= dirs.testsite.root %>/lib/requirejs' },
                     { src: './lib/requirejs-text', dest: '<%= dirs.testsite.root %>/lib/requirejs-text' },
-                    { src: './themes', dest: './test/lib/<%= meta.name %>/themes' },
+                    { src: './themes', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/themes' },
                     { src: './<%= meta.name %>.js', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/<%= meta.name %>.js' },
                     { src: './<%= meta.name %>.d.ts', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/<%= meta.name %>.d.ts' },
                     { src: './<%= meta.name %>.js.map', dest: '<%= dirs.testsite.root %>/lib/<%= meta.name %>/<%= meta.name %>.js.map' },
