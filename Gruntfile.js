@@ -209,4 +209,7 @@ module.exports = function (grunt) {
     grunt.registerTask('package', ['nugetpack:dist']);
     grunt.registerTask('publish', ['nugetpack:dist', 'nugetpush:dist']);
     grunt.registerTask('lib:reset', ['clean', 'setup', 'symlink:test', 'symlink:testsite']);
+    grunt.registerTask('dist:upbuild', ['version:bump', 'version:apply', 'typescript:build']);
+    grunt.registerTask('dist:upminor', ['version:bump:minor', 'version:apply', 'typescript:build']);
+    grunt.registerTask('dist:upmajor', ['version:bump:major', 'version:apply', 'typescript:build']);
 };
