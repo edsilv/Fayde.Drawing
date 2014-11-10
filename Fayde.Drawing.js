@@ -1,7 +1,7 @@
 var Fayde;
 (function (Fayde) {
     (function (Drawing) {
-        Drawing.Version = '0.4.0';
+        Drawing.Version = '0.2.2';
     })(Fayde.Drawing || (Fayde.Drawing = {}));
     var Drawing = Fayde.Drawing;
 })(Fayde || (Fayde = {}));
