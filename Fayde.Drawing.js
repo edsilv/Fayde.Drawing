@@ -216,7 +216,7 @@ var Fayde;
                     _super.apply(this, arguments);
                 }
                 SketchUpdater.prototype.init = function () {
-                    this.setRenderPipe(minerva.singleton(sketch.render.SketchRenderPipeDef));
+                    this.setHitTestPipe(minerva.singleton(sketch.hittest.SketchHitTestPipeDef)).setRenderPipe(minerva.singleton(sketch.render.SketchRenderPipeDef));
 
                     var assets = this.assets;
                     assets.canvas = document.createElement('canvas');
@@ -233,6 +233,27 @@ var Fayde;
                 return SketchUpdater;
             })(minerva.core.Updater);
             sketch.SketchUpdater = SketchUpdater;
+        })(Drawing.sketch || (Drawing.sketch = {}));
+        var sketch = Drawing.sketch;
+    })(Fayde.Drawing || (Fayde.Drawing = {}));
+    var Drawing = Fayde.Drawing;
+})(Fayde || (Fayde = {}));
+var Fayde;
+(function (Fayde) {
+    (function (Drawing) {
+        (function (sketch) {
+            (function (hittest) {
+                var SketchHitTestPipeDef = (function (_super) {
+                    __extends(SketchHitTestPipeDef, _super);
+                    function SketchHitTestPipeDef() {
+                        _super.call(this);
+                        this.removeTapin('canHitInside');
+                    }
+                    return SketchHitTestPipeDef;
+                })(minerva.core.hittest.HitTestPipeDef);
+                hittest.SketchHitTestPipeDef = SketchHitTestPipeDef;
+            })(sketch.hittest || (sketch.hittest = {}));
+            var hittest = sketch.hittest;
         })(Drawing.sketch || (Drawing.sketch = {}));
         var sketch = Drawing.sketch;
     })(Fayde.Drawing || (Fayde.Drawing = {}));

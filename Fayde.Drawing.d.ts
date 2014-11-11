@@ -70,6 +70,11 @@ declare module Fayde.Drawing.sketch {
         public onSizeChanged(oldSize: minerva.Size, newSize: minerva.Size): void;
     }
 }
+declare module Fayde.Drawing.sketch.hittest {
+    class SketchHitTestPipeDef extends minerva.core.hittest.HitTestPipeDef {
+        constructor();
+    }
+}
 declare module Fayde.Drawing.sketch.render {
     interface IInput extends minerva.core.render.IInput {
         actualWidth: number;
