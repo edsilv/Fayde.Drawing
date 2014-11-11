@@ -6,7 +6,8 @@ module Fayde.Drawing.sketch {
         assets: ISketchUpdaterAssets;
 
         init () {
-            this.setRenderPipe(minerva.singleton(render.SketchRenderPipeDef));
+            this.setHitTestPipe(minerva.singleton(hittest.SketchHitTestPipeDef))
+                .setRenderPipe(minerva.singleton(render.SketchRenderPipeDef));
 
             var assets = this.assets;
             assets.canvas = document.createElement('canvas');
