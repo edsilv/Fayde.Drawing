@@ -15,7 +15,7 @@ module Fayde.Drawing {
         private _Timer: Fayde.ClockTimer;
         private _LastVisualTick: number = new Date(0).getTime();
         Milliseconds: number;
-        Draw = new MulticastEvent<SketchDrawEventArgs>();
+        Draw = new nullstone.Event<SketchDrawEventArgs>();
         Click = new RoutedEvent<RoutedEventArgs>();
         MousePosition: Point = new Point();
 
@@ -29,7 +29,7 @@ module Fayde.Drawing {
 
         RaiseDraw (canvas: HTMLCanvasElement, width: number, height: number) {
             var session = new SketchSession(canvas, width, height, this.Milliseconds);
-            this.Draw.Raise(this, new SketchDrawEventArgs(session));
+            this.Draw.raise(this, new SketchDrawEventArgs(session));
         }
 
         OnTicked (lastTime: number, nowTime: number) {
