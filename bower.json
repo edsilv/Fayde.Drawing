@@ -19,9 +19,9 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "fayde": "~0.13.0",
-    "requirejs": "~2.1.15",
-    "requirejs-text": "~2.0.12",
-    "qunit": "~1.14.0"
+    "fayde": "~0.14.0"
+  },
+  "devDependencies": {
+    "qunit": "~1.15.0"
   }
 }

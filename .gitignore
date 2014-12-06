@@ -4,16 +4,12 @@
 *.user
 *.dll
 *.xap
-*.js.map
 src/packages
 .idea
 node_modules
-testsite/lib
-testsite/ViewModels/MainViewModel.js
-test/lib
-test/runner.js
-test/tests/test1.js
-
-testsite/.build/
 
 lib/
+test/lib/
+test/.build/
+testsite/lib/
+testsite/.build/
