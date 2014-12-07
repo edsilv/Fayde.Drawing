@@ -19,7 +19,7 @@ module Fayde.Drawing.sketch.render {
     module tapins {
         export function doRender (input: IInput, state: IState, output: IOutput, ctx: minerva.core.render.RenderContext, region: minerva.Rect, tree: minerva.core.UpdaterTree): boolean {
             ctx.save();
-            //TODO: this.RenderLayoutClip(ctx);
+            minerva.core.helpers.renderLayoutClip(ctx, input, tree);
             var w = input.actualWidth;
             var h = input.actualHeight;
             input.sketcher && input.sketcher(input.canvas, w, h);

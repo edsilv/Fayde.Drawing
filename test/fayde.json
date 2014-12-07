@@ -3,5 +3,9 @@
     "Fayde.Drawing": {
       "exports": "Fayde.Drawing"
     }
+  },
+  "themes": {
+    "Fayde.Drawing": {
+    }
   }
 }
