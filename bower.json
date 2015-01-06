@@ -1,6 +1,6 @@
 {
   "name": "Fayde.Drawing",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/edsilv/fayde.drawing"
@@ -12,7 +12,6 @@
   "ignore": [
     "build",
     "nuget",
-    "src",
     "test",
     "testsite",
     "typings",
