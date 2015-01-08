@@ -37,8 +37,8 @@ module Fayde.Drawing {
             return this.Ctx.canvas.height;
         }
 
-        get Size(): minerva.Size {
-            return new minerva.Size(this.Width, this.Height);
+        get Size(): Size {
+            return new Size(this.Width, this.Height);
         }
 
         get Milliseconds(): number {

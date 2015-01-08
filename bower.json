@@ -1,6 +1,6 @@
 {
   "name": "Fayde.Drawing",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/edsilv/fayde.drawing"
@@ -18,7 +18,7 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "fayde": "~0.14.0"
+    "fayde": "~0.16.0"
   },
   "devDependencies": {
     "qunit": "~1.15.0"
