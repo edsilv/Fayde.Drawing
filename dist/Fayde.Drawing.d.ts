@@ -33,6 +33,7 @@ declare module Fayde.Drawing {
         Ctx: CanvasRenderingContext2D;
         Width: number;
         Height: number;
+        Size: minerva.Size;
         Milliseconds: number;
         constructor();
         Setup(): void;
