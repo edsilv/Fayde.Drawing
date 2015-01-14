@@ -1,10 +1,10 @@
 {
   "libs": {
-    "Fayde.Drawing": {
+    "fayde.drawing": {
       "exports": "Fayde.Drawing"
     }
   },
   "themes": {
-    "Fayde.Drawing": {}
+    "fayde.drawing": {}
   }
 }

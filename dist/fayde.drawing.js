@@ -271,4 +271,4 @@ var Fayde;
         })(sketch = Drawing.sketch || (Drawing.sketch = {}));
     })(Drawing = Fayde.Drawing || (Fayde.Drawing = {}));
 })(Fayde || (Fayde = {}));
-//# sourceMappingURL=Fayde.Drawing.js.map
+//# sourceMappingURL=fayde.drawing.js.map

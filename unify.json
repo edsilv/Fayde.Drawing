@@ -1,5 +1,5 @@
 {
-  "name": "Fayde.Drawing",
+  "name": "fayde.drawing",
   "client": {
     "tests": [
       {
@@ -13,12 +13,12 @@
     ]
   },
   "type": "lib",
-  "dist": "dist/Fayde.Drawing",
+  "dist": "dist/fayde.drawing",
   "library": {
     "type": "export",
     "exports": "Fayde.Drawing"
   },
   "typings": [
-    "dist/Fayde.Drawing.d.ts"
+    "dist/fayde.drawing.d.ts"
   ]
 }
