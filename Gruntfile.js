@@ -20,7 +20,7 @@ module.exports = function (grunt) {
         livereload: 15151
     };
     var meta = {
-        name: 'Fayde.Drawing'
+        name: 'fayde.drawing'
     };
 
     var dirs = {
