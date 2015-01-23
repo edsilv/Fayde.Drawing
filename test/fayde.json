@@ -1,10 +1,15 @@
 {
   "libs": {
     "fayde.drawing": {
-      "exports": "Fayde.Drawing"
-    }
+      "exports": "Fayde.Drawing",
+      "deps": [
+        "qunit"
+      ]
+    },
+    "qunit": {}
   },
   "themes": {
-    "fayde.drawing": {}
+    "fayde.drawing": {},
+    "qunit": "none"
   }
 }
