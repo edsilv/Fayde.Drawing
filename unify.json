@@ -8,7 +8,8 @@
       },
       {
         "file": "testsite/fayde.json",
-        "lib": "testsite/lib"
+        "lib": "testsite/lib",
+        "exclude": ["qunit"]
       }
     ]
   },
@@ -18,6 +19,7 @@
     "type": "export",
     "exports": "Fayde.Drawing"
   },
+  "themes": {},
   "typings": [
     "dist/fayde.drawing.d.ts"
   ]
