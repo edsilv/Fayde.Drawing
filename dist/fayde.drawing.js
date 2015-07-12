@@ -2,7 +2,7 @@ var Fayde;
 (function (Fayde) {
     var Drawing;
     (function (Drawing) {
-        Drawing.Version = '0.3.4';
+        Drawing.Version = '0.4.1';
     })(Drawing = Fayde.Drawing || (Fayde.Drawing = {}));
 })(Fayde || (Fayde = {}));
 var __extends = this.__extends || function (d, b) {
@@ -271,4 +271,4 @@ var Fayde;
         })(sketch = Drawing.sketch || (Drawing.sketch = {}));
     })(Drawing = Fayde.Drawing || (Fayde.Drawing = {}));
 })(Fayde || (Fayde = {}));
-//# sourceMappingURL=Fayde.Drawing.js.map
+//# sourceMappingURL=fayde.drawing.js.map

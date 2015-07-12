@@ -1,3 +1,3 @@
 module Fayde.Drawing {
-    export var Version = '0.3.4';
+    export var Version = '0.4.1';
 }

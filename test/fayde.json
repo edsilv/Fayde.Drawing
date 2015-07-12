@@ -1,6 +1,6 @@
 {
   "libs": {
-    "Fayde.Drawing": {
+    "fayde.drawing": {
       "exports": "Fayde.Drawing",
       "deps": [
         "qunit"
@@ -9,7 +9,7 @@
     "qunit": {}
   },
   "themes": {
-    "Fayde.Drawing": "none",
+    "fayde.drawing": {},
     "qunit": "none"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "Fayde.Drawing",
+  "name": "fayde.drawing",
   "client": {
     "tests": [
       {
@@ -8,17 +8,19 @@
       },
       {
         "file": "testsite/fayde.json",
-        "lib": "testsite/lib"
+        "lib": "testsite/lib",
+        "exclude": ["qunit"]
       }
     ]
   },
   "type": "lib",
-  "dist": "dist/Fayde.Drawing",
+  "dist": "dist/fayde.drawing",
   "library": {
     "type": "export",
     "exports": "Fayde.Drawing"
   },
+  "themes": {},
   "typings": [
-    "dist/Fayde.Drawing.d.ts"
+    "dist/fayde.drawing.d.ts"
   ]
 }
