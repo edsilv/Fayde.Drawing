@@ -3,9 +3,10 @@ module Fayde.Drawing {
 
     export class SketchContext {
 
-        private _IsSetup:boolean = false;
+        private _IsPaused: boolean = false;
+        private _IsSetup: boolean = false;
         private _SketchSession: Fayde.Drawing.SketchSession;
-        public FrameCount:number = 0;
+        public FrameCount: number = 0;
 
         set SketchSession(value: Fayde.Drawing.SketchSession) {
             // if this is the first time the SketchSession has been set, call Setup
@@ -43,6 +44,18 @@ module Fayde.Drawing {
 
         get Milliseconds(): number {
             return this.SketchSession.Milliseconds;
+        }
+
+        public Play(): void {
+            this._IsPaused = false;
+        }
+
+        public Pause(): void {
+            this._IsPaused = true;
+        }
+
+        get IsPaused(): boolean {
+            return this._IsPaused;
         }
 
         constructor() {

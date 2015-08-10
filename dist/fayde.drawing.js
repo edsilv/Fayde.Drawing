@@ -2,7 +2,7 @@ var Fayde;
 (function (Fayde) {
     var Drawing;
     (function (Drawing) {
-        Drawing.Version = '0.4.1';
+        Drawing.Version = '0.4.2';
     })(Drawing = Fayde.Drawing || (Fayde.Drawing = {}));
 })(Fayde || (Fayde = {}));
 var __extends = this.__extends || function (d, b) {
@@ -85,6 +85,7 @@ var Fayde;
     (function (Drawing) {
         var SketchContext = (function () {
             function SketchContext() {
+                this._IsPaused = false;
                 this._IsSetup = false;
                 this.FrameCount = 0;
             }
@@ -137,6 +138,19 @@ var Fayde;
             Object.defineProperty(SketchContext.prototype, "Milliseconds", {
                 get: function () {
                     return this.SketchSession.Milliseconds;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            SketchContext.prototype.Play = function () {
+                this._IsPaused = false;
+            };
+            SketchContext.prototype.Pause = function () {
+                this._IsPaused = true;
+            };
+            Object.defineProperty(SketchContext.prototype, "IsPaused", {
+                get: function () {
+                    return this._IsPaused;
                 },
                 enumerable: true,
                 configurable: true

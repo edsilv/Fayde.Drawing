@@ -26,6 +26,7 @@ declare module Fayde.Drawing {
 }
 declare module Fayde.Drawing {
     class SketchContext {
+        private _IsPaused;
         private _IsSetup;
         private _SketchSession;
         FrameCount: number;
@@ -35,6 +36,9 @@ declare module Fayde.Drawing {
         Height: number;
         Size: Size;
         Milliseconds: number;
+        Play(): void;
+        Pause(): void;
+        IsPaused: boolean;
         constructor();
         Setup(): void;
         Update(): void;
