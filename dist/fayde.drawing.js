@@ -2,7 +2,7 @@ var Fayde;
 (function (Fayde) {
     var Drawing;
     (function (Drawing) {
-        Drawing.Version = '0.4.2';
+        Drawing.Version = '0.4.3';
     })(Drawing = Fayde.Drawing || (Fayde.Drawing = {}));
 })(Fayde || (Fayde = {}));
 var __extends = this.__extends || function (d, b) {

@@ -1,5 +1,5 @@
 module Fayde.Drawing {
-    export class SketchSession {
+    export class SketchSession implements ISketchContext {
         private _Canvas: HTMLCanvasElement;
         public Ctx: CanvasRenderingContext2D;
 
